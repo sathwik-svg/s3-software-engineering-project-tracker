@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }} | Project Tracker{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">PROJECT DETAILS</p>
+        <h1>{{ project.name }}</h1>
+        <p>{{ project.description }}</p>
+    </div>
+
+    <span class="badge">{{ project.status }}</span>
+</div>
+
+<section class="form-card">
+
+    <h2>Add Task</h2>
+
+    <form
+        method="POST"
+        action="{{ url_for('add_task', project_id=project.id) }}"
+    >
+
+        <input
+            type="text"
+            name="title"
+            placeholder="Task title"
+            required
+        >
+
+        <div class="form-row">
+
+            <select name="status">
+                <option>Todo</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+
+            <select name="priority">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+            </select>
+
+        </div>
+
+        <button class="button" type="submit">
+            Add Task
+        </button>
+
+    </form>
+
+</section>
+
+<section class="section-header">
+    <div>
+        <h2>Project Tasks</h2>
+    </div>
+</section>
+
+<section class="task-list">
+
+{% for task in project.tasks %}
+
+<div class="task-card">
+
+    <div>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.priority }} priority</p>
+    </div>
+
+    <span class="badge">{{ task.status }}</span>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+    <h3>No tasks yet</h3>
+    <p>Add your first task above.</p>
+</div>
+
+{% endfor %}
+
+</section>
+
+{% endblock %}

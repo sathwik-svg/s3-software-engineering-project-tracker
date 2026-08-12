@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Projects | Project Tracker{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">PROJECT MANAGEMENT</p>
+        <h1>Projects</h1>
+        <p>Create and manage your college software projects.</p>
+    </div>
+</div>
+
+<section class="form-card">
+
+    <h2>Create New Project</h2>
+
+    <form method="POST" action="{{ url_for('add_project') }}">
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Project name"
+            required
+        >
+
+        <textarea
+            name="description"
+            placeholder="Project description"
+            required
+        ></textarea>
+
+        <div class="form-row">
+
+            <select name="status">
+                <option>Planning</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+            </select>
+
+            <select name="priority">
+                <option>Low</option>
+                <option selected>Medium</option>
+                <option>High</option>
+            </select>
+
+            <input
+                type="date"
+                name="deadline"
+            >
+
+        </div>
+
+        <button class="button" type="submit">
+            Create Project
+        </button>
+
+    </form>
+
+</section>
+
+<section class="project-grid">
+
+{% for project in projects %}
+
+<div class="project-card">
+
+    <div class="project-top">
+        <span class="badge">{{ project.status }}</span>
+        <span class="priority">{{ project.priority }}</span>
+    </div>
+
+    <h3>{{ project.name }}</h3>
+
+    <p>{{ project.description }}</p>
+
+    {% if project.deadline %}
+    <p class="deadline">
+        📅 {{ project.deadline }}
+    </p>
+    {% endif %}
+
+    <a
+        class="project-link"
+        href="{{ url_for('project', project_id=project.id) }}"
+    >
+        Manage Project →
+    </a>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+    <h3>No projects found.</h3>
+</div>
+
+{% endfor %}
+
+</section>
+
+{% endblock %}

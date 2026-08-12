@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks | Project Tracker{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <p class="eyebrow">TASK MANAGEMENT</p>
+        <h1>All Tasks</h1>
+        <p>Track tasks across your college projects.</p>
+    </div>
+</div>
+
+<section class="task-list">
+
+{% for task in tasks %}
+
+<div class="task-card">
+
+    <div>
+        <h3>{{ task.title }}</h3>
+        <p>
+            Project:
+            <strong>{{ task.project.name }}</strong>
+        </p>
+    </div>
+
+    <div>
+        <span class="badge">{{ task.status }}</span>
+        <span class="priority">{{ task.priority }}</span>
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="empty">
+    <h3>No tasks available</h3>
+    <p>Create a project and add tasks.</p>
+</div>
+
+{% endfor %}
+
+</section>
+
+{% endblock %}

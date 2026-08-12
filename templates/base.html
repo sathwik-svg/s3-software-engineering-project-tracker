@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Project Tracker{% endblock %}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="brand">
+        🎓 Software Engineering Project Tracker
+    </div>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Dashboard</a>
+        <a href="{{ url_for('projects') }}">Projects</a>
+        <a href="{{ url_for('tasks') }}">Tasks</a>
+    </nav>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>S3 Software Engineering Project Tracker • College Project</p>
+</footer>
+
+</body>
+</html>
