@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: s3-software-engineering-project-tracker
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
